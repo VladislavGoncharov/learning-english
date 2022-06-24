@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning word</title>
+</head>
+<body>
+<a th:href="@{/}" >Главная</a>
+
+<div th:if="${error != null}">
+    <h1 th:text="${error}"></h1>
+</div>
+<div th:switch="${lang}">
+    <div th:case="'eng'">
+        <h3>Английский -> Русский  <a th:href="@{/learning-word/rus}">переключиться</a> </h3>
+        <form th:action="@{/learning-word/check-eng}" th:object="${word}" method="post">
+            <input type="hidden" th:field="*{englandWord}">
+            <input type="hidden" th:field="*{russianWord}">
+            <table>
+                <thead>
+                <tr>
+                    <td colspan="2"> Проверка знаний слов</td>
+                </tr>
+                <tr>
+                    Переведите это слово
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${word.englandWord}"></td>
+                    <td><input type="text" th:field="*{russianWordCheck}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit">Проверить</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div th:case="'rus'">
+        <h3>Русский -> Английский <a th:href="@{/learning-word/eng}">переключиться</a> </h3>
+
+        <form th:action="@{/learning-word/check-rus}" th:object="${word}" method="post">
+            <input type="hidden" th:field="*{englandWord}">
+            <input type="hidden" th:field="*{russianWord}">
+            <table>
+                <thead>
+                <tr>
+                    <td colspan="2"> Проверка знаний слов</td>
+                </tr>
+                <tr>
+                    Переведите это слово
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${word.russianWord}"></td>
+                    <td><input type="text" th:field="*{englandWordCheck}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit">Проверить</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+<h1> "<span th:text="${quantity}"></span>" правильных ответов подряд</h1>
+
+</body>
+</html>

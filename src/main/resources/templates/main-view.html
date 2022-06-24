@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Main view</title>
+</head>
+<body>
+<h3> Main view for learning english</h3>
+<a th:href="@{/learning-word/eng}" >Проверка знаний</a>
+
+<table>
+    <thaed>
+        <form th:action="@{/save}" th:object="${newWord}" method="post">
+            <tr th:if="error!=null">
+                <td th:text="${error}"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Добавить слово</td>
+            </tr>
+            <tr>
+                <td>Английское</td>
+                <td>Русское</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" th:field="*{englandWord}">
+                </td>
+                <td>
+                    <input type="text" th:field="*{russianWord}">
+                </td>
+                <td>
+                    <button type="submit">Добавить</button>
+                </td>
+            </tr>
+        </form>
+        <tr>
+            <td colspan="3">
+                Все слова
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Английские
+            </td>
+            <td>
+                Русские
+            </td>
+            <td></td>
+        </tr>
+    </thaed>
+    <tbody>
+        <tr th:each="line : ${allWord}">
+            <td th:text="${line.englandWord}"></td>
+            <td th:text="${line.russianWord}"></td>
+            <td>
+                <button type="button"
+                        th:onclick="|window.location.href='/delete/${line.id}'|"
+                > Удалить </button>
+            </td>
+    </tbody>
+</table>
+</body>
+</html>

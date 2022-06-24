@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: bestuser
+    hikari:
+      schema: learning_english
+  flyway:
+    baseline-on-migrate: true
